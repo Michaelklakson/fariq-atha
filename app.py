@@ -11,7 +11,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Data ini yang akan dikirim dan dibaca oleh {{ data.nama }}, dll di index.html kamu
     data = {
         "nama": "Fariq Attha Gifari",
         "umur": 20,
@@ -37,6 +36,5 @@ run_flask()
 # Beri jeda 1 detik agar Flask benar-benar siap
 time.sleep(1)
 
-# Tampilkan aplikasi Flask di dalam halaman Streamlit menggunakan iframe
-st.markdown("<h3 style='text-align: center; color: #4F46E5;'>Web Profile Berhasil Dihosting!</h3>", unsafe_allow_html=True)
-st.components.v1.iframe("http://localhost:8502", height=700, scrolling=True)
+# Tampilkan aplikasi Flask ke dalam halaman Streamlit menggunakan iframe
+st.components.v1.iframe("http://localhost:8502", height=750, scrolling=True)
