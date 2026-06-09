@@ -1,15 +1,17 @@
 import subprocess
 import time
+import os
 from flask import Flask, render_template
 import streamlit as st
 
 # ==========================================
-# 1. BAGIAN KODE FLASK KAMU
+# 1. KODE FLASK (Membaca templates/index.html)
 # ==========================================
 app = Flask(__name__)
 
 @app.route('/')
 def home():
+    # Data ini yang akan dikirim dan dibaca oleh {{ data.nama }}, dll di index.html kamu
     data = {
         "nama": "Fariq Attha Gifari",
         "umur": 20,
@@ -21,15 +23,11 @@ def home():
 # ==========================================
 # 2. TRIK AGAR BISA JALAN DI STREAMLIT CLOUD
 # ==========================================
-# Streamlit Cloud akan selalu mengeksekusi file ini. 
-# Kita gunakan Streamlit untuk memicu jalannya Flask.
+st.set_page_config(page_title="CV Fariq Atta", layout="wide")
 
-st.set_page_config(page_title="Flask App on Streamlit", layout="wide")
-
-# Jalankan Flask di latar belakang (background process) pada port 8502
+# Jalankan Flask di latar belakang pada port 8502
 @st.cache_resource
 def run_flask():
-    # Menjalankan Flask menggunakan thread terpisah agar tidak mengunci Streamlit
     import threading
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8502, debug=False, use_reloader=False), daemon=True).start()
 
@@ -40,6 +38,5 @@ run_flask()
 time.sleep(1)
 
 # Tampilkan aplikasi Flask di dalam halaman Streamlit menggunakan iframe
-st.title("Aplikasi Flask Berhasil Dihosting!")
-st.write("Berikut adalah tampilan dari Flask app kamu:")
-st.components.v1.iframe("http://localhost:8502", height=600, scrolling=True)
+st.markdown("<h3 style='text-align: center; color: #4F46E5;'>Web Profile Berhasil Dihosting!</h3>", unsafe_allow_html=True)
+st.components.v1.iframe("http://localhost:8502", height=700, scrolling=True)
