@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Fariq Atta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl p-10 max-w-lg w-full text-center">
+
+        <!-- Foto -->
+        <div class="mb-6">
+            <img src="https://via.placeholder.com/150"
+                 class="w-36 h-36 mx-auto rounded-full border-4 border-indigo-500 shadow-lg">
+        </div>
+
+        <!-- Nama -->
+        <h1 class="text-3xl font-bold text-gray-800">
+            {{ data.nama }}
+        </h1>
+
+        <!-- Status -->
+        <p class="text-indigo-600 font-medium mt-2">
+            {{ data.status }}
+        </p>
+
+        <!-- Umur -->
+        <div class="mt-4">
+            <span class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm">
+                {{ data.umur }} Tahun
+            </span>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t my-6"></div>
+
+        <!-- Info Tambahan -->
+        <div class="space-y-2 text-gray-600">
+            <p>🎓 Mahasiswa aktif</p>
+            <p>📍 Politeknik Caltex Riau</p>
+        </div>
+
+        <!-- Button -->
+        <div class="mt-8">
+            <button class="bg-indigo-600 text-white px-6 py-2 rounded-full shadow hover:bg-indigo-700 transition">
+                Contact Me
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>
