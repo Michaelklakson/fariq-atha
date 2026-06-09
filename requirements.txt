@@ -1,3 +1,2 @@
-Flask==3.0.33
-Werkzeug==3.0.333
-gunicorn==22.0.0
+Flask
+streamlit
