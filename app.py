@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -12,4 +13,7 @@ def home():
     return render_template('index.html', data=data)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    # Ambil port dari server hosting secara dinamis, jika tidak ada gunakan 5000 (default)
+    port = int(os.environ.get("PORT", 5000))
+    # Set host ke '0.0.0.0' agar aplikasi bisa diakses dari luar server lokal
+    app.run(host='0.0.0.0', port=port)
