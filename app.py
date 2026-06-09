@@ -1,40 +1,51 @@
-import subprocess
-import time
-import os
-from flask import Flask, render_template
 import streamlit as st
 
-# ==========================================
-# 1. KODE FLASK (Membaca templates/index.html)
-# ==========================================
-app = Flask(__name__)
+# Set agar tampilan penuh (wide)
+st.set_page_config(page_title="CV Fariq Atta", layout="centered")
 
-@app.route('/')
-def home():
-    data = {
-        "nama": "Fariq Attha Gifari",
-        "umur": 20,
-        "status": "Mahasiswa di Politeknik Caltex Riau"
-    }
-    return render_template('index.html', data=data)
+# Data Profil
+data = {
+    "nama": "Fariq Attha Gifari",
+    "umur": 20,
+    "status": "Mahasiswa di Politeknik Caltex Riau"
+}
 
+# Memasukkan CSS Tailwind dan HTML langsung ke Streamlit
+st.html(f"""
+    <script src="https://cdn.tailwindcss.com"></script>
+    <div class="flex items-center justify-center p-4">
+        <div class="bg-white shadow-2xl rounded-3xl p-10 max-w-lg w-full text-center border border-gray-100">
+            <div class="mb-6">
+                <img src="https://via.placeholder.com/150" 
+                     class="w-36 h-36 mx-auto rounded-full border-4 border-indigo-500 shadow-lg">
+            </div>
 
-# ==========================================
-# 2. TRIK AGAR BISA JALAN DI STREAMLIT CLOUD
-# ==========================================
-st.set_page_config(page_title="CV Fariq Atta", layout="wide")
+            <h1 class="text-3xl font-bold text-gray-800">
+                {data['nama']}
+            </h1>
 
-# Jalankan Flask di latar belakang pada port 8502
-@st.cache_resource
-def run_flask():
-    import threading
-    threading.Thread(target=lambda: app.run(host='0.0.0.0', port=8502, debug=False, use_reloader=False), daemon=True).start()
+            <p class="text-indigo-600 font-medium mt-2">
+                {data['status']}
+            </p>
 
-# Panggil fungsi untuk menyalakan server Flask
-run_flask()
+            <div class="mt-4">
+                <span class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm">
+                    {data['umur']} Tahun
+                </span>
+            </div>
 
-# Beri jeda 1 detik agar Flask benar-benar siap
-time.sleep(1)
+            <div class="border-t my-6"></div>
 
-# Tampilkan aplikasi Flask ke dalam halaman Streamlit menggunakan iframe
-st.components.v1.iframe("http://localhost:8502", height=750, scrolling=True)
+            <div class="space-y-2 text-gray-600">
+                <p>🎓 Mahasiswa aktif</p>
+                <p>📍 Politeknik Caltex Riau</p>
+            </div>
+
+            <div class="mt-8">
+                <a href="#" class="bg-indigo-600 text-white px-6 py-2 rounded-full shadow hover:bg-indigo-700 transition inline-block">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </div>
+""")
